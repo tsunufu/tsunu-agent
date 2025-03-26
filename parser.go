@@ -20,7 +20,7 @@ const (
 // ParseAndExecuteTool はLLMのレスポンスをパースしてツールを実行する
 func ParseAndExecuteTool(response string) (ToolResponse, string, bool) {
 	// XMLタグを抽出する正規表現
-	re := regexp.MustCompile(`<([a-z_]+)>([\s\S]*?)</\1>`)
+	re := regexp.MustCompile(`<(list_file|read_file|write_file|ask_question|execute_command|complete)>([\s\S]*?)</(?:list_file|read_file|write_file|ask_question|execute_command|complete)>`)
 	match := re.FindStringSubmatch(response)
 
 	if len(match) < 3 {
